@@ -1,0 +1,29 @@
+version: "3"
+services:
+  web:
+    # replace username/repo:tag with your name and image details
+    image: flaskapp:python2
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: myflaskapp
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: mypassword
+  db:
+    image: mysql:5.7 
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./myflaskapp.sql:/docker-entrypoint-initdb.d/myflaskapp.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: users 
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - 3306
+volumes:
+  db_data:
+

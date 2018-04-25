@@ -1,0 +1,3 @@
+create docker-compose file with
+	-Web service
+	-db service
